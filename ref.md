@@ -56,3 +56,9 @@ GraphQL Specs
 - npm run devStart
 
 - node src/server.js
+
+# Root Resolvers (built-in)
+
+- Query
+- Mutation
+- Subscription
