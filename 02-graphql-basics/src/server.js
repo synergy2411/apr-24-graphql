@@ -8,36 +8,46 @@ const users = [
 ];
 
 const posts = [
-  { id: "p001", title: "GraphQL 101", body: "for beginners", published: false },
+  {
+    id: "p001",
+    title: "GraphQL 101",
+    body: "for beginners",
+    published: false,
+    author: "u001",
+  },
   {
     id: "p002",
     title: "Mastering GraphQL",
     body: "for advanced developers",
     published: true,
+    author: "u002",
   },
   {
     id: "p003",
     title: "React for Beginners",
     body: "frontend library",
     published: false,
+    author: "u001",
   },
   {
     id: "p004",
     title: "Mastering NodeJS",
     body: "for server side scripting",
     published: true,
+    author: "u003",
   },
 ];
 
 const typeDefs = /* GraphQL */ `
   type Query {
     users(searchTerm: String): [User!]!
-    posts(search: String): [Post!]!
+    posts(searchTerm: String, published: Boolean): [Post!]!
   }
   type User {
     id: ID!
     name: String!
     age: Int!
+    posts: [Post!]!
   }
   type Post {
     id: ID!
@@ -57,8 +67,24 @@ const resolvers = {
       }
       return users;
     },
-    posts: () => {
+    posts: (parent, args, context, info) => {
+      if (args.searchTerm && args.searchTerm.trim() !== "") {
+        return posts.filter(
+          (post) =>
+            post.title.toLowerCase().includes(args.searchTerm.toLowerCase()) ||
+            post.body.toLowerCase().includes(args.searchTerm.toLowerCase())
+        );
+      }
+
+      if (args.published) {
+        return posts.filter((post) => post.published);
+      }
       return posts;
+    },
+  },
+  User: {
+    posts: (parent, args, context, info) => {
+      return posts.filter((post) => post.author === parent.id);
     },
   },
 };
