@@ -3,13 +3,17 @@ import { createSchema, createYoga } from "graphql-yoga";
 import { createServer } from "node:http";
 import { v4 } from "uuid";
 
-const users = [
+// u001 -> p001, p003, c004
+
+// u002 -> p002, c001, c004, c002
+
+let users = [
   { id: "u001", name: "Monica Geller", age: 22 },
   { id: "u002", name: "Rachel Green", age: 24 },
   { id: "u003", name: "Chandler Bing", age: 23 },
 ];
 
-const posts = [
+let posts = [
   {
     id: "p001",
     title: "GraphQL 101",
@@ -40,17 +44,19 @@ const posts = [
   },
 ];
 
-const comments = [
+let comments = [
   { id: "c001", text: "Awesome book", post: "p004", creator: "u002" },
   { id: "c002", text: "I Like it", post: "p002", creator: "u003" },
   { id: "c003", text: "Eager to read", post: "p004", creator: "u001" },
-  { id: "c004", text: "Luv it ❤️❤️", post: "p001", creator: "u001" },
+  { id: "c004", text: "Luv it ❤️❤️", post: "p001", creator: "u002" },
 ];
 
 const typeDefs = /* GraphQL */ `
   type Mutation {
     createUser(data: CreateUserInput): User!
+    deleteUser(userId: ID!): User!
     createPost(data: CreatePostInput): Post!
+    deletePost(postId: ID!): Post!
     createComment(data: CreateCommentInput): Comment!
     deleteComment(commentId: ID!): Comment!
   }
@@ -139,6 +145,21 @@ const resolvers = {
       };
       posts.push(newPost);
       return newPost;
+    },
+    deletePost: (parent, args, context, info) => {
+      const { postId } = args;
+
+      const position = posts.findIndex((post) => post.id === postId);
+
+      if (position === -1) {
+        throw new GraphQLError("Unable to find post for ID - " + postId);
+      }
+
+      comments = comments.filter((comment) => comment.post !== postId);
+
+      const [deletedPost] = posts.splice(position, 1);
+
+      return deletedPost;
     },
     createComment: (parent, args, context, info) => {
       const { text, postId, creatorId } = args.data;
