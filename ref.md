@@ -51,6 +51,8 @@ GraphQL Specs
   > to create graphql server
 - npm install nodemon -D
 
+- npm install uuid
+
 # to start nodemon
 
 - npm run devStart

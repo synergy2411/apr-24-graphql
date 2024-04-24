@@ -1,5 +1,7 @@
-import { createServer } from "node:http";
+import { GraphQLError } from "graphql";
 import { createSchema, createYoga } from "graphql-yoga";
+import { createServer } from "node:http";
+import { v4 } from "uuid";
 
 const users = [
   { id: "u001", name: "Monica Geller", age: 22 },
@@ -46,6 +48,11 @@ const comments = [
 ];
 
 const typeDefs = /* GraphQL */ `
+  type Mutation {
+    createUser(data: CreateUserInput): User!
+    createPost(data: CreatePostInput): Post!
+  }
+
   type Query {
     users(searchTerm: String): [User!]!
     posts(searchTerm: String, published: Boolean): [Post!]!
@@ -72,9 +79,60 @@ const typeDefs = /* GraphQL */ `
     post: Post!
     creator: User!
   }
+
+  input CreateUserInput {
+    name: String!
+    age: Int!
+  }
+
+  input CreatePostInput {
+    title: String!
+    body: String!
+    authorId: ID!
+  }
 `;
 
 const resolvers = {
+  Mutation: {
+    createUser: (parent, args, context, info) => {
+      const { name, age } = args.data;
+
+      const isMatch = users.some(
+        (user) => user.name.toLowerCase() === name.toLowerCase()
+      );
+      if (isMatch) {
+        throw new GraphQLError("Name already taken.");
+      }
+
+      let newUser = {
+        id: v4(),
+        name,
+        age,
+      };
+
+      users.push(newUser);
+
+      return newUser;
+    },
+    createPost: (parent, args, context, info) => {
+      const { title, body, authorId } = args.data;
+      const isMatched = users.some((user) => user.id === authorId);
+
+      if (!isMatched) {
+        throw new GraphQLError("Author does not exist.");
+      }
+
+      let newPost = {
+        id: v4(),
+        title,
+        body,
+        published: false,
+        author: authorId,
+      };
+      posts.push(newPost);
+      return newPost;
+    },
+  },
   Query: {
     users: (parent, args, context, info) => {
       if (args.searchTerm && args.searchTerm.trim() !== "") {
