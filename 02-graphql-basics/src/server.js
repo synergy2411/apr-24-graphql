@@ -39,10 +39,10 @@ const posts = [
 ];
 
 const comments = [
-  { id: "c001", text: "Awesome book", post: "p004" },
-  { id: "c002", text: "I Like it", post: "p002" },
-  { id: "c003", text: "Eager to read", post: "p004" },
-  { id: "c004", text: "Luv it ❤️❤️", post: "p001" },
+  { id: "c001", text: "Awesome book", post: "p004", creator: "u002" },
+  { id: "c002", text: "I Like it", post: "p002", creator: "u003" },
+  { id: "c003", text: "Eager to read", post: "p004", creator: "u001" },
+  { id: "c004", text: "Luv it ❤️❤️", post: "p001", creator: "u001" },
 ];
 
 const typeDefs = /* GraphQL */ `
@@ -56,6 +56,7 @@ const typeDefs = /* GraphQL */ `
     name: String!
     age: Int!
     posts: [Post!]!
+    comments: [Comment!]!
   }
   type Post {
     id: ID!
@@ -69,13 +70,14 @@ const typeDefs = /* GraphQL */ `
     id: ID!
     text: String!
     post: Post!
+    creator: User!
   }
 `;
 
 const resolvers = {
   Query: {
     users: (parent, args, context, info) => {
-      if (args.searchTerm.trim() !== "") {
+      if (args.searchTerm && args.searchTerm.trim() !== "") {
         return users.filter((user) =>
           user.name.toLowerCase().includes(args.searchTerm.toLowerCase())
         );
@@ -104,6 +106,9 @@ const resolvers = {
     posts: (parent, args, context, info) => {
       return posts.filter((post) => post.author === parent.id);
     },
+    comments: (parent, args, context, info) => {
+      return comments.filter((comment) => comment.creator === parent.id);
+    },
   },
   Post: {
     author: (parent, args, context, info) => {
@@ -116,6 +121,9 @@ const resolvers = {
   Comment: {
     post: (parent, args, context, info) => {
       return posts.find((post) => post.id === parent.post);
+    },
+    creator: (parent, args, context, info) => {
+      return users.find((user) => user.id === parent.creator);
     },
   },
 };
