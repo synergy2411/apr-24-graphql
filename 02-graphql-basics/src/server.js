@@ -1,4 +1,4 @@
-import { GraphQLError } from "graphql";
+import { GraphQLError, graphql } from "graphql";
 import { createSchema, createYoga } from "graphql-yoga";
 import { createServer } from "node:http";
 import { v4 } from "uuid";
@@ -51,6 +51,8 @@ const typeDefs = /* GraphQL */ `
   type Mutation {
     createUser(data: CreateUserInput): User!
     createPost(data: CreatePostInput): Post!
+    createComment(data: CreateCommentInput): Comment!
+    deleteComment(commentId: ID!): Comment!
   }
 
   type Query {
@@ -89,6 +91,12 @@ const typeDefs = /* GraphQL */ `
     title: String!
     body: String!
     authorId: ID!
+  }
+
+  input CreateCommentInput {
+    text: String!
+    postId: ID!
+    creatorId: ID!
   }
 `;
 
@@ -131,6 +139,45 @@ const resolvers = {
       };
       posts.push(newPost);
       return newPost;
+    },
+    createComment: (parent, args, context, info) => {
+      const { text, postId, creatorId } = args.data;
+
+      const userMatched = users.some((user) => user.id === creatorId);
+      if (!userMatched) {
+        throw new GraphQLError("Unable to locate the Creator");
+      }
+
+      const postMatched = posts.some((post) => post.id === postId);
+      if (!postMatched) {
+        throw new GraphQLError("Post not found");
+      }
+
+      let newComment = {
+        id: v4(),
+        text,
+        creator: creatorId,
+        post: postId,
+      };
+
+      comments.push(newComment);
+
+      return newComment;
+    },
+    deleteComment: (parent, args, context, info) => {
+      const { commentId } = args;
+
+      const position = comments.findIndex(
+        (comment) => comment.id === commentId
+      );
+
+      if (position === -1) {
+        throw new GraphQLError("Comment ID does not exists - " + commentId);
+      }
+
+      const [deletedComment] = comments.splice(position, 1);
+
+      return deletedComment;
     },
   },
   Query: {
