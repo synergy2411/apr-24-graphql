@@ -49,3 +49,10 @@ GraphQL Specs
   > Generates package.json file
 - npm install graphql graphql-yoga
   > to create graphql server
+- npm install nodemon -D
+
+# to start nodemon
+
+- npm run devStart
+
+- node src/server.js

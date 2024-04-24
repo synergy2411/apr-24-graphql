@@ -1,15 +1,23 @@
 import { createServer } from "node:http";
 import { createSchema, createYoga } from "graphql-yoga";
 
+// Scalar Types - ID, String, Int, Float, Boolean
+
 const typeDefs = `
     type Query {
         hello : String!
+        productId : ID!
+        quantity : Int!
+        isAvailable : Boolean!
     }
 `;
 
 const resolvers = {
   Query: {
     hello: () => "World!!",
+    productId: () => "P001",
+    quantity: () => 301,
+    isAvailable: () => true,
   },
 };
 
