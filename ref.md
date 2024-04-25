@@ -52,6 +52,7 @@ GraphQL Specs
 - npm install nodemon -D
 
 - npm install uuid
+- npm install graphql-import-files
 
 # to start nodemon
 
