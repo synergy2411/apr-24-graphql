@@ -1,4 +1,4 @@
-import { GraphQLError, graphql } from "graphql";
+import { GraphQLError } from "graphql";
 import { createSchema, createYoga } from "graphql-yoga";
 import { createServer } from "node:http";
 import { v4 } from "uuid";
@@ -55,6 +55,7 @@ const typeDefs = /* GraphQL */ `
   type Mutation {
     createUser(data: CreateUserInput): User!
     deleteUser(userId: ID!): User!
+    updateUser(data: UpdateUserInput): User!
     createPost(data: CreatePostInput): Post!
     deletePost(postId: ID!): Post!
     createComment(data: CreateCommentInput): Comment!
@@ -104,6 +105,12 @@ const typeDefs = /* GraphQL */ `
     postId: ID!
     creatorId: ID!
   }
+
+  input UpdateUserInput {
+    name: String
+    age: Int
+    userId: ID!
+  }
 `;
 
 const resolvers = {
@@ -151,6 +158,24 @@ const resolvers = {
       const [deletedUser] = users.splice(position, 1);
 
       return deletedUser;
+    },
+    updateUser: (parent, args, context, info) => {
+      const { name, age, userId } = args.data;
+
+      const position = users.findIndex((user) => user.id === userId);
+      if (position === -1) {
+        throw new GraphQLError("Unable to find user for " + userId);
+      }
+
+      if (typeof name === "string") {
+        users[position].name = name;
+      }
+
+      if (typeof age === "number") {
+        users[position].age = age;
+      }
+
+      return users[position];
     },
     createPost: (parent, args, context, info) => {
       const { title, body, authorId } = args.data;
