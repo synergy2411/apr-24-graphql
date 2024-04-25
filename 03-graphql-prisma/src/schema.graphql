@@ -1,3 +1,28 @@
 type Query {
   hello: String!
 }
+type Mutation {
+  userRegistration(data: UserRegistrationInput): User!
+}
+
+type User {
+  id: ID!
+  name: String!
+  age: Int!
+  email: String!
+  role: Role
+}
+
+enum Role {
+  ANALYST
+  MANAGER
+  PROGRAMMER
+}
+
+input UserRegistrationInput {
+  name: String!
+  age: Int!
+  email: String!
+  password: String!
+  role: Role
+}

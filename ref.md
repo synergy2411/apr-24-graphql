@@ -96,3 +96,8 @@ mongodb+srv://testuser:ZQE8ftFsAEYgLXNG@mydemocluster.wj9wi9m.mongodb.net/?retry
 - npx prisma init
 - npx prisma db push
 - npm install @prisma/client
+- npm install bcryptjs
+
+db.User.insertOne({ name: "Phiebe Buffe", email: "phiebe@test.com", password: "phiebe123", age: 21, })
+
+prisma:query db.User.aggregate([ { $match: { $expr: { $and: [ { $and: [ { $eq: [ "$\_id", { $literal: ObjectId("662a3b3f2f4f475ba74ce78b"), }, ], }, { $ne: [ "$\_id", "$$REMOVE", ], }, ], }, ], }, }, }, { $project: { \_id: 1, name: 1, email: 1, password: 1, age: 1, role: 1, }, }, ])
