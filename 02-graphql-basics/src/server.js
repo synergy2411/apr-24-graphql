@@ -3,7 +3,7 @@ import { createSchema, createYoga } from "graphql-yoga";
 import { createServer } from "node:http";
 import { v4 } from "uuid";
 
-// u001 -> p001, p003, c004
+// u001 -> p001, p003, c004, c003
 
 // u002 -> p002, c001, c004, c002
 
@@ -127,6 +127,30 @@ const resolvers = {
       users.push(newUser);
 
       return newUser;
+    },
+    deleteUser: (parent, args, context, info) => {
+      const { userId } = args;
+
+      const position = users.findIndex((user) => user.id === userId);
+
+      if (position === -1) {
+        throw new GraphQLError("User does not exists for " + userId);
+      }
+
+      comments = comments.filter((comment) => comment.creator !== userId);
+
+      posts = posts.filter((post) => {
+        const matchedUser = post.author === userId;
+
+        if (matchedUser) {
+          comments = comments.filter((comment) => comment.post !== post.id);
+        }
+        return !matchedUser;
+      });
+
+      const [deletedUser] = users.splice(position, 1);
+
+      return deletedUser;
     },
     createPost: (parent, args, context, info) => {
       const { title, body, authorId } = args.data;
