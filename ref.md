@@ -65,3 +65,34 @@ GraphQL Specs
 - Query
 - Mutation
 - Subscription
+
+# NoSQL Database
+
+- Column-based : Cassendra
+- Key-value pair based : Redis
+- Graph based : NeoJ
+- Document based : MongoDB
+
+---
+
+# MongoDB Operations
+
+- Create - insertOne, insertMany
+- Read - find, findOne
+- Update - updateOne, updateMany
+- delete - deleteOne, deleteMany
+
+mongodb+srv://testuser:ZQE8ftFsAEYgLXNG@mydemocluster.wj9wi9m.mongodb.net/?retryWrites=true&w=majority&appName=MyDemoCluster
+
+# Local MongoDB Deployment URI
+
+- mongodb://localhost:27017
+
+# Primsa - ORM Tool for GraphQL
+
+- npm init -y
+- npm install graphql graphql-yoga
+
+- npx prisma init
+- npx prisma db push
+- npm install @prisma/client
