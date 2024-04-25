@@ -1,28 +1,26 @@
+import { createServer } from "node:http";
+import { createSchema, createYoga } from "graphql-yoga";
 import { PrismaClient } from "@prisma/client";
+import { loadFile } from "graphql-import-files";
+import resolvers from "./resolvers/index.js";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const foundUser = await prisma.user.findUnique({
-    where: {
-      email: "xyz@test.com",
-    },
-  });
+  const startServer = () => {
+    const schema = createSchema({
+      typeDefs: loadFile("./src/schema.graphql"),
+      resolvers,
+    });
 
-  console.log(foundUser);
+    const yoga = createYoga({ schema });
 
-  //   await prisma.user.deleteMany();
-  //   const createdUser = await prisma.user.create({
-  //     data: {
-  //       name: "Monica Geller",
-  //       email: "monica@test.com",
-  //       password: "monica123",
-  //       age: 23,
-  //       role: "ANALYST",
-  //     },
-  //   });
+    const server = createServer(yoga);
 
-  //   console.log("NEW ITEM : ", createdUser);
+    server.listen(4040, () => console.log("Server started on PORT : 4040"));
+  };
+
+  startServer();
 }
 
 main()
