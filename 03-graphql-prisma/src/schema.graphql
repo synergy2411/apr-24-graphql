@@ -3,6 +3,16 @@ type Query {
 }
 type Mutation {
   userRegistration(data: UserRegistrationInput): User!
+  userLogin(data: UserLoginInput!): UserLoginPayload!
+}
+
+input UserLoginInput {
+  email: String!
+  password: String!
+}
+
+type UserLoginPayload {
+  token: String!
 }
 
 type User {

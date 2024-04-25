@@ -1,11 +1,15 @@
 import { createServer } from "node:http";
+import { GraphQLError } from "graphql";
 import { createSchema, createYoga } from "graphql-yoga";
 import { PrismaClient } from "@prisma/client";
 import { loadFile } from "graphql-import-files";
-import { GraphQLError } from "graphql";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const { compareSync, hashSync } = bcrypt;
+const { sign, verify } = jwt;
+const SECRET_KEY = "MY_SUPER_SECRET_KEY";
+
 // import resolvers from "./resolvers/index.js";
 
 // const prisma = new PrismaClient({ log: ["query"] });
@@ -31,6 +35,33 @@ const resolvers = {
           },
         });
         return createdUser;
+      } catch (err) {
+        throw new GraphQLError(err);
+      }
+    },
+    userLogin: async (parent, args, context, info) => {
+      try {
+        const { email, password } = args.data;
+        const foundUser = await prisma.user.findUnique({
+          where: {
+            email,
+          },
+        });
+
+        if (!foundUser) {
+          throw new GraphQLError("Unable to find user for " + email);
+        }
+
+        const isMatch = compareSync(password, foundUser.password);
+
+        if (!isMatch) {
+          throw new GraphQLError("Password does not match, Try again!");
+        }
+
+        //   generate token
+        const token = sign(foundUser, SECRET_KEY);
+
+        return { token };
       } catch (err) {
         throw new GraphQLError(err);
       }

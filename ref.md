@@ -97,6 +97,7 @@ mongodb+srv://testuser:ZQE8ftFsAEYgLXNG@mydemocluster.wj9wi9m.mongodb.net/?retry
 - npx prisma db push
 - npm install @prisma/client
 - npm install bcryptjs
+- npm install jsonwebtoken
 
 db.User.insertOne({ name: "Phiebe Buffe", email: "phiebe@test.com", password: "phiebe123", age: 21, })
 

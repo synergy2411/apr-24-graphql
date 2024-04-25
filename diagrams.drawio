@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net" modified="2024-04-25T11:43:59.453Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="0eRvkujv2l1oRrZk6Ato" version="24.2.7" type="device">
+  <diagram name="Page-1" id="TA6WngSubUJo5hZGgUxE">
+    <mxGraphModel dx="938" dy="538" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="rbTTfsZRNdOWB5K3F2gQ-1" target="rbTTfsZRNdOWB5K3F2gQ-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="rbTTfsZRNdOWB5K3F2gQ-1" target="rbTTfsZRNdOWB5K3F2gQ-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="134" y="150" width="120" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="rbTTfsZRNdOWB5K3F2gQ-2" target="rbTTfsZRNdOWB5K3F2gQ-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-2" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="504" y="150" width="120" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-3" value="Client&lt;div&gt;Angular / React / JS App&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="109" y="523" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-4" value="Server&lt;div&gt;Php, NodeJS/ JavaScript / DotNet&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="464" y="523" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-7" value="/ login [Email, Password]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="289" y="188" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-8" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="754" y="250" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-9" value="DB" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="764" y="338" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=27.5;entryPerimeter=0;" edge="1" parent="1" source="rbTTfsZRNdOWB5K3F2gQ-2" target="rbTTfsZRNdOWB5K3F2gQ-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=52.5;exitPerimeter=0;entryX=1.023;entryY=0.423;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="rbTTfsZRNdOWB5K3F2gQ-8" target="rbTTfsZRNdOWB5K3F2gQ-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-12" value="Generates&lt;div&gt;JWT Token&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="624" y="303" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-14" value="Response With Token" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="294" y="300" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-15" value="LocalStorage&lt;div&gt;Services (Angular)&lt;/div&gt;&lt;div&gt;Redux (React&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="14" y="293" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-17" value="/protected_resource [JWT TOKEN]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="259" y="388" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-18" value="Server verify the JWT Token&lt;div&gt;and then only responds&amp;nbsp;&lt;/div&gt;&lt;div&gt;for protected resource&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="624" y="400" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-19" value="" style="endArrow=classic;html=1;rounded=0;entryX=1.039;entryY=0.896;entryDx=0;entryDy=0;entryPerimeter=0;exitX=-0.032;exitY=0.894;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="rbTTfsZRNdOWB5K3F2gQ-2" target="rbTTfsZRNdOWB5K3F2gQ-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="444" y="430" as="sourcePoint" />
+            <mxPoint x="494" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-20" value="Response with protected resource" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="274" y="480" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rbTTfsZRNdOWB5K3F2gQ-21" value="JWT Understanding" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="364" y="60" width="100" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
