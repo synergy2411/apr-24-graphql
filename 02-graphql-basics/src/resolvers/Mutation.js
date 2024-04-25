@@ -64,7 +64,7 @@ let Mutation = {
 
     return db.users[position];
   },
-  createPost: (parent, args, { db }, info) => {
+  createPost: (parent, args, { db, pubsub }, info) => {
     const { title, body, authorId } = args.data;
     const isMatched = db.users.some((user) => user.id === authorId);
 
@@ -80,9 +80,11 @@ let Mutation = {
       author: authorId,
     };
     db.posts.push(newPost);
+
+    pubsub.publish("post", { mutationType: "CREATED", data: newPost });
     return newPost;
   },
-  deletePost: (parent, args, { db }, info) => {
+  deletePost: (parent, args, { db, pubsub }, info) => {
     const { postId } = args;
 
     const position = db.posts.findIndex((post) => post.id === postId);
@@ -94,6 +96,8 @@ let Mutation = {
     db.comments = db.comments.filter((comment) => comment.post !== postId);
 
     const [deletedPost] = db.posts.splice(position, 1);
+
+    pubsub.publish("post", { mutationType: "DELETED", data: deletedPost });
 
     return deletedPost;
   },
@@ -119,11 +123,14 @@ let Mutation = {
 
     db.comments.push(newComment);
 
-    pubsub.publish("comment", newComment);
+    pubsub.publish("comment", {
+      mutationType: "CREATED",
+      data: newComment,
+    });
 
     return newComment;
   },
-  deleteComment: (parent, args, { db }, info) => {
+  deleteComment: (parent, args, { db, pubsub }, info) => {
     const { commentId } = args;
 
     const position = db.comments.findIndex(
@@ -135,6 +142,11 @@ let Mutation = {
     }
 
     const [deletedComment] = db.comments.splice(position, 1);
+
+    pubsub.publish("comment", {
+      mutationType: "DELETED",
+      data: deletedComment,
+    });
 
     return deletedComment;
   },
