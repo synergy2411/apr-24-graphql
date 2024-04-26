@@ -17,7 +17,27 @@ const prisma = new PrismaClient();
 
 const resolvers = {
   Query: {
-    hello: () => "Hello Again!",
+    posts: async () => {
+      try {
+        const allPosts = await prisma.post.findMany({
+          include: {
+            author: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                age: true,
+                role: true,
+              },
+            },
+          },
+        });
+
+        return allPosts;
+      } catch (err) {
+        throw new GraphQLError(err);
+      }
+    },
   },
   Mutation: {
     userRegistration: async (parent, args, context, info) => {

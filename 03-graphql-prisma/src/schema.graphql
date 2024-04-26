@@ -1,5 +1,5 @@
 type Query {
-  hello: String!
+  posts: [Post!]!
 }
 type Mutation {
   userRegistration(data: UserRegistrationInput): User!
@@ -22,6 +22,7 @@ type Post {
   title: String!
   body: String!
   published: Boolean
+  author: User
 }
 
 type UserLoginPayload {
