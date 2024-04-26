@@ -1,23 +1,15 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery, useLazyQuery } from "@apollo/client";
+import FETCH_POSTS from "../../apollo/fetchPosts";
 import PostDetail from "./PostDetail";
-
-const FETCH_POSTS = gql`
-  query {
-    posts {
-      id
-      title
-      body
-      published
-      author {
-        id
-        name
-      }
-    }
-  }
-`;
+import { useEffect } from "react";
 
 function Posts() {
-  const { data, loading, error } = useQuery(FETCH_POSTS);
+  // const { data, loading, error } = useQuery(FETCH_POSTS);
+  const [queryFunction, { data, error, loading }] = useLazyQuery(FETCH_POSTS);
+
+  useEffect(() => {
+    queryFunction();
+  }, [queryFunction]);
 
   if (error) return <p>{error.message}</p>;
 

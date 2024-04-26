@@ -1,16 +1,9 @@
-import LoginForm from "./Components/Auth/LoginForm";
-import AddPostForm from "./Components/Posts/AddPostForm";
-import Posts from "./Components/Posts/Posts";
+import Layout from "./Components/Layout/Layout";
 
 function App() {
   return (
     <div className="container">
-      <h1>App works!</h1>
-      {/* <Posts /> */}
-
-      <LoginForm />
-
-      <AddPostForm />
+      <Layout />
     </div>
   );
 }
