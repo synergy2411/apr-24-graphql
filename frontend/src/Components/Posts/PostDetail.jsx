@@ -7,7 +7,7 @@ function PostDetail({ post }) {
         </div>
         <div className="card-body">
           <p>{post.body}</p>
-          <p>Author : {post.author.name}</p>
+          <p className="lead">Author : {post.author.name}</p>
         </div>
       </div>
     </div>

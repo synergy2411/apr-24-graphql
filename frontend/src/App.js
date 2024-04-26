@@ -1,10 +1,13 @@
+import LoginForm from "./Components/Auth/LoginForm";
 import Posts from "./Components/Posts/Posts";
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <h1>App works!</h1>
-      <Posts />
+      {/* <Posts /> */}
+
+      <LoginForm />
     </div>
   );
 }
