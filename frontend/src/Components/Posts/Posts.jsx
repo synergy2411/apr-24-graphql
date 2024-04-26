@@ -1,7 +1,7 @@
-import { useQuery, useLazyQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
+import { useEffect } from "react";
 import FETCH_POSTS from "../../apollo/fetchPosts";
 import PostDetail from "./PostDetail";
-import { useEffect } from "react";
 
 function Posts() {
   // const { data, loading, error } = useQuery(FETCH_POSTS);
