@@ -59,33 +59,30 @@ const resolvers = {
         }
 
         //   generate token
-        const token = sign(foundUser, SECRET_KEY);
+        const token = sign({ id: foundUser.id }, SECRET_KEY);
 
         return { token };
       } catch (err) {
         throw new GraphQLError(err);
       }
     },
-    createPost: async (parent, args, context, info) => {
+    createPost: async (parent, args, { token }, info) => {
       try {
-        const { title, body, authorId } = args.data;
-
-        const foundUser = await prisma.user.findUnique({
-          where: {
-            id: authorId,
-          },
-        });
-
-        if (!foundUser) {
-          throw new GraphQLError("Unable to find user for " + authorId);
+        if (token === null) {
+          throw new GraphQLError(
+            "Token required to create Post. Please Login first."
+          );
         }
+        const { id } = verify(token, SECRET_KEY);
+
+        const { title, body } = args.data;
 
         const createdPost = await prisma.post.create({
           data: {
             title,
             body,
             published: false,
-            authorId,
+            authorId: id,
           },
         });
 
@@ -106,6 +103,17 @@ async function main() {
 
     const yoga = createYoga({
       schema,
+      context: ({ request }) => {
+        const authHeader = request.headers.get("authorization");
+        let token = null;
+        if (authHeader != null) {
+          // "Bearer Token_value" -> ["Bearer", "Token_value"]
+          token = authHeader.split(" ")[1];
+        }
+        return {
+          token,
+        };
+      },
     });
 
     const server = createServer(yoga);

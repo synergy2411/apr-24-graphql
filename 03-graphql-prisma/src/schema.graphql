@@ -15,7 +15,6 @@ input UserLoginInput {
 input CreatePostInput {
   title: String!
   body: String!
-  authorId: ID!
 }
 
 type Post {
