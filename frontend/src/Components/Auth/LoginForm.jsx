@@ -1,13 +1,32 @@
 import { useRef } from "react";
+import { gql, useMutation } from "@apollo/client";
+
+const USER_LOGIN = gql`
+  mutation mutationUserLogin($email: String!, $password: String!) {
+    userLogin(data: { email: $email, password: $password }) {
+      token
+    }
+  }
+`;
 
 function LoginForm() {
   const emailRef = useRef();
   const passwordRef = useRef();
 
+  const [userLoginMutation] = useMutation(USER_LOGIN);
+
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log("EMAIL : ", emailRef.current.value);
-    console.log("PASSWORD : ", passwordRef.current.value);
+    userLoginMutation({
+      variables: {
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      },
+    })
+      .then(({ data }) => {
+        localStorage.setItem("token", data.userLogin.token);
+      })
+      .catch(console.error);
   };
 
   return (
