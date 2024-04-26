@@ -13,7 +13,7 @@ function LoginForm() {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const [userLoginMutation] = useMutation(USER_LOGIN);
+  const [userLoginMutation, { error }] = useMutation(USER_LOGIN);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -22,15 +22,18 @@ function LoginForm() {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       },
-    })
-      .then(({ data }) => {
-        localStorage.setItem("token", data.userLogin.token);
-      })
-      .catch(console.error);
+    }).then(({ data }) => {
+      localStorage.setItem("token", data.userLogin.token);
+    });
   };
 
   return (
     <>
+      {error && (
+        <div className="alert alert-danger">
+          <p>{error.message}</p>
+        </div>
+      )}
       <form onSubmit={submitHandler}>
         {/* email */}
         <div className="form-floating mb-3">
