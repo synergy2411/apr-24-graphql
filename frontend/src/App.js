@@ -1,4 +1,5 @@
 import LoginForm from "./Components/Auth/LoginForm";
+import AddPostForm from "./Components/Posts/AddPostForm";
 import Posts from "./Components/Posts/Posts";
 
 function App() {
@@ -8,6 +9,8 @@ function App() {
       {/* <Posts /> */}
 
       <LoginForm />
+
+      <AddPostForm />
     </div>
   );
 }

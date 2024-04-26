@@ -102,5 +102,5 @@ mongodb+srv://testuser:ZQE8ftFsAEYgLXNG@mydemocluster.wj9wi9m.mongodb.net/?retry
 # Frontend Application
 
 - npx create-react-app frontend
-- npm install boostrap
+- npm install bootstrap
 - npm install @apollo/client graphql
