@@ -66,6 +66,34 @@ const resolvers = {
         throw new GraphQLError(err);
       }
     },
+    createPost: async (parent, args, context, info) => {
+      try {
+        const { title, body, authorId } = args.data;
+
+        const foundUser = await prisma.user.findUnique({
+          where: {
+            id: authorId,
+          },
+        });
+
+        if (!foundUser) {
+          throw new GraphQLError("Unable to find user for " + authorId);
+        }
+
+        const createdPost = await prisma.post.create({
+          data: {
+            title,
+            body,
+            published: false,
+            authorId,
+          },
+        });
+
+        return createdPost;
+      } catch (err) {
+        throw new GraphQLError(err);
+      }
+    },
   },
 };
 

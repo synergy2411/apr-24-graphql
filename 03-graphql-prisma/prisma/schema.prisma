@@ -14,8 +14,18 @@ model User {
   password String
   age      Int
   role     Role?
+  Post     Post[]
 
   @@index([name, age])
+}
+
+model Post {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  body      String
+  published Boolean
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  String  @db.ObjectId
 }
 
 enum Role {
