@@ -99,6 +99,8 @@ mongodb+srv://testuser:ZQE8ftFsAEYgLXNG@mydemocluster.wj9wi9m.mongodb.net/?retry
 - npm install bcryptjs
 - npm install jsonwebtoken
 
-db.User.insertOne({ name: "Phiebe Buffe", email: "phiebe@test.com", password: "phiebe123", age: 21, })
+# Frontend Application
 
-prisma:query db.User.aggregate([ { $match: { $expr: { $and: [ { $and: [ { $eq: [ "$\_id", { $literal: ObjectId("662a3b3f2f4f475ba74ce78b"), }, ], }, { $ne: [ "$\_id", "$$REMOVE", ], }, ], }, ], }, }, }, { $project: { \_id: 1, name: 1, email: 1, password: 1, age: 1, role: 1, }, }, ])
+- npx create-react-app frontend
+- npm install boostrap
+- npm install @apollo/client graphql
