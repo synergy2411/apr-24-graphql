@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import PostDetail from "./PostDetail";
 
 const FETCH_POSTS = gql`
   query {
@@ -23,16 +24,14 @@ function Posts() {
   if (loading) return <h1>Loading...</h1>;
 
   return (
-    <>
+    <div className="container">
       <h1 className="text-center">All Posts</h1>
 
-      <ul>
+      <div className="row">
         {data &&
-          data.posts.map((post) => (
-            <li key={post.id}>{post.title.toUpperCase()}</li>
-          ))}
-      </ul>
-    </>
+          data.posts.map((post) => <PostDetail post={post} key={post.id} />)}
+      </div>
+    </div>
   );
 }
 
